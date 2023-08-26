@@ -1,68 +1,51 @@
-import { PhotoIcon } from '@heroicons/react/24/outline'
-import { Download, File } from 'lucide-react'
-import React from 'react'
+'use client'
 
-const people = [
-    {
-        name: 'Leslie Alexander',
-        email: 'leslie.alexander@example.com',
-        role: 'Co-Founder / CEO',
-        imageUrl:
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        href: '#',
-        lastSeen: '3h ago',
-        lastSeenDateTime: '2023-01-23T13:23Z',
-    },
-    {
-        name: 'Michael Foster',
-        email: 'michael.foster@example.com',
-        role: 'Co-Founder / CTO',
-        imageUrl:
-            'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        href: '#',
-        lastSeen: '3h ago',
-        lastSeenDateTime: '2023-01-23T13:23Z',
-    },
-    {
-        name: 'Dries Vincent',
-        email: 'dries.vincent@example.com',
-        role: 'Business Relations',
-        imageUrl:
-            'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        href: '#',
-        lastSeen: null,
-    },
-    {
-        name: 'Lindsay Walton',
-        email: 'lindsay.walton@example.com',
-        role: 'Front-end Developer',
-        imageUrl:
-            'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        href: '#',
-        lastSeen: '3h ago',
-        lastSeenDateTime: '2023-01-23T13:23Z',
-    },
-    {
-        name: 'Courtney Henry',
-        email: 'courtney.henry@example.com',
-        role: 'Designer',
-        imageUrl:
-            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        href: '#',
-        lastSeen: '3h ago',
-        lastSeenDateTime: '2023-01-23T13:23Z',
-    },
-    {
-        name: 'Tom Cook',
-        email: 'tom.cook@example.com',
-        role: 'Director of Product',
-        imageUrl:
-            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        href: '#',
-        lastSeen: null,
-    },
+import { PhotoIcon } from '@heroicons/react/24/outline'
+import axios from 'axios'
+import { Download, File } from 'lucide-react'
+import React, { ChangeEventHandler, useEffect, useState } from 'react'
+
+const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
 ]
+
 const Dashboard = () => {
+    const [files, setFiles] = useState<IFile[]>([])
+    console.log(files)
+
+    const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+        console.log('here')
+
+        if (!e.target.files) return
+        if (!e.target.files[0]) return
+        console.log('here')
+        const file = e.target.files[0]
+        const data = new FormData()
+        data.append('file', file)
+        axios.post('http://localhost:5000/upload', data).then((res) => {
+            const data = res.data as IFile
+            data.createdAt = new Date().toISOString()
+            setFiles([...files, data])
+        })
+    }
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/upload').then((res) => {
+            setFiles(res.data)
+        })
+    }, [])
+
     return (
         <div>
             <div className="col-span-full">
@@ -90,6 +73,7 @@ const Dashboard = () => {
                     </div>
 
                     <input
+                        onChange={onChange}
                         id="file-upload"
                         name="file-upload"
                         type="file"
@@ -101,9 +85,11 @@ const Dashboard = () => {
                 role="list"
                 className="divide-y mt-10 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl"
             >
-                {people.map((person) => (
-                    <li
-                        key={person.email}
+                {files.map((file) => (
+                    <a
+                        download={true}
+                        href={file.url}
+                        key={file.key}
                         className="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6"
                     >
                         <div className="flex min-w-0 gap-x-4 items-center">
@@ -114,16 +100,26 @@ const Dashboard = () => {
                             <div className="min-w-0 flex-auto">
                                 <p className="text-sm font-semibold leading-6 text-gray-900">
                                     <span className="absolute inset-x-0 -top-px bottom-0" />
-                                    {person.name}
+                                    {file.name}
                                 </p>
                             </div>
                         </div>
                         <div className="flex shrink-0 items-center gap-x-4">
                             <div className="hidden sm:flex sm:flex-col sm:items-end">
                                 <p className="mt-1 text-xs leading-5 text-gray-500">
-                                    Last seen
-                                    <time dateTime={person.lastSeenDateTime}>
-                                        {person.lastSeen}
+                                    <time dateTime={file.createdAt}>
+                                        {new Date(file.createdAt).getDate()}
+                                        {' '}
+                                        {
+                                            months[
+                                                new Date(
+                                                    file.createdAt
+                                                ).getMonth()
+                                            ]
+                                        }{' '}
+                                        {new Date(file.createdAt).getHours()}
+                                        {':'}
+                                        {new Date(file.createdAt).getDate()}
                                     </time>
                                 </p>
                             </div>
@@ -132,7 +128,7 @@ const Dashboard = () => {
                                 aria-hidden="true"
                             />
                         </div>
-                    </li>
+                    </a>
                 ))}
             </ul>
         </div>
