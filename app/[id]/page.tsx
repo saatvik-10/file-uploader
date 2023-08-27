@@ -29,14 +29,14 @@ const Dashboard = ({ params: { id = 'files' } }) => {
         const file = e.target.files[0]
         const data = new FormData()
         data.append('file', file)
-        axios.post(`http://localhost:5000/upload/${id}`, data).then((res) => {
+        axios.post(`${process.env.NEXT_PUBLIC_API_BASE as string}/upload/${id}`, data).then((res) => {
             const data = res.data as IFile
             data.createdAt = new Date().toISOString()
             setFiles([...files, data])
         })
     }
     useEffect(() => {
-        axios.get(`http://localhost:5000/upload/${id}`).then((res) => {
+        axios.get(`${process.env.NEXT_PUBLIC_API_BASE as string}/upload/${id}`).then((res) => {
             setFiles(res.data)
         })
     }, [])
