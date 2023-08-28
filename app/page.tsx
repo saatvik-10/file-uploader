@@ -7,7 +7,7 @@ import { users } from '@/lib/users'
 
 export default function Home() {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between bg-background p-24">
+        <main className="flex min-h-screen flex-col items-center justify-between bg-background py-20 px-5">
             <ul
                 role="list"
                 className="divide-y mt-10 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl w-full max-w-6xl mx-auto"
