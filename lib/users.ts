@@ -1,13 +1,14 @@
-export const users = [{
-    name: 'Chirag',
-    href: '/chirag',
-}, {
-    name: 'Ayush',
-    href: '/ayush',
-}, {
-    name: 'Himanshu',
-    href: '/himanshu',
-}, {
-    name: 'Others',
-    href: '/others',
-}]
+export const users = [
+    {
+        name: 'Chirag',
+        href: '/chirag',
+    },
+    { 
+        name: 'Chirag 2', 
+        href: '/chirag2' 
+    },
+    {
+        name: 'Others',
+        href: '/others',
+    },
+]
