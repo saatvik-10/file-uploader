@@ -1,9 +1,7 @@
 'use client'
 import React from 'react'
-
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { users } from '@/lib/users'
@@ -18,7 +16,7 @@ const navigation = [
 
 const Navbar = () => {
     return (
-        <Disclosure as="nav" className=" bg-primary lg:border-none">
+        <Disclosure as="nav" className=" bg-sky-800 lg:border-none">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
@@ -27,7 +25,7 @@ const Navbar = () => {
                                 <div className="shrink-0">
                                     <img
                                         className="block h-8 w-8"
-                                        src="https://tailwindui.com/img/logos/mark.svg?color=white"
+                                        src="/logo.png"
                                         alt="Your Company"
                                     />
                                 </div>
