@@ -51,27 +51,27 @@ const Dashboard = ({ params: { id = 'files' } }) => {
     return (
         <div>
             <div className="col-span-full">
-                <p className="block text-sm font-medium leading-6 text-gray-900">
+                {/* <p className="block text-sm font-medium leading-6 text-gray-900">
                     Upload File
-                </p>
+                </p> */}
                 <label
                     htmlFor="file-upload"
                     className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10"
                 >
                     <div className="text-center">
                         <PhotoIcon
-                            className="mx-auto h-12 w-12 text-gray-300"
+                            className="mx-auto h-16 w-16 text-gray-300"
                             aria-hidden="true"
                         />
-                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                        <div className="mt-4 flex text-md leading-6 text-gray-600">
                             <div className="relative cursor-pointer rounded-md bg-white font-semibold text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-primary">
                                 <span>Upload a file</span>
                             </div>
                             <p className="pl-1">or drag and drop</p>
                         </div>
-                        <p className="text-xs leading-5 text-gray-600">
+                        {/* <p className="text-xs leading-5 text-gray-600">
                             Upload Your File
-                        </p>
+                        </p> */}
                     </div>
 
                     <input
