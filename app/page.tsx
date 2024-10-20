@@ -1,9 +1,8 @@
-import Button from "@/components/ui/Button";
+import Button from '@/components/ui/Button'
 import { ChevronLast, User } from 'lucide-react'
 import React from 'react'
 import Link from 'next/link'
 import { users } from '@/lib/users'
-
 
 export default function Home() {
     return (
@@ -12,7 +11,7 @@ export default function Home() {
                 role="list"
                 className="divide-y mt-10 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl w-full max-w-6xl mx-auto"
             >
-                {users.map((user,index) => (
+                {users.map((user, index) => (
                     <Link
                         href={user.href}
                         key={index}
@@ -40,5 +39,5 @@ export default function Home() {
                 ))}
             </ul>
         </main>
-    );
+    )
 }
