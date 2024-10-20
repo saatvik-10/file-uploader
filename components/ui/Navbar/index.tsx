@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { users } from '@/lib/users'
 
 const navigation = [
-    { name: 'Chirag', href: '/chirag', current: true },
+    { name: 'Saatvik', href: '/saatvik', current: true },
     { name: 'Team', href: '#', current: false },
     { name: 'Projects', href: '#', current: false },
     { name: 'Calendar', href: '#', current: false },
@@ -18,21 +18,21 @@ const navigation = [
 
 const Navbar = () => {
     return (
-        <Disclosure as='nav' className=' bg-primary lg:border-none'>
+        <Disclosure as="nav" className=" bg-primary lg:border-none">
             {({ open }) => (
                 <>
-                    <div className='mx-auto max-w-7xl px-2 sm:px-4 lg:px-8'>
-                        <div className='relative flex h-16 items-center justify-between'>
-                            <div className='flex items-center px-2 lg:px-0'>
-                                <div className='shrink-0'>
+                    <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+                        <div className="relative flex h-16 items-center justify-between">
+                            <div className="flex items-center px-2 lg:px-0">
+                                <div className="shrink-0">
                                     <img
-                                        className='block h-8 w-8'
-                                        src='https://tailwindui.com/img/logos/mark.svg?color=white'
-                                        alt='Your Company'
+                                        className="block h-8 w-8"
+                                        src="https://tailwindui.com/img/logos/mark.svg?color=white"
+                                        alt="Your Company"
                                     />
                                 </div>
-                                <div className='hidden lg:ml-10 lg:block'>
-                                    <div className='flex space-x-4'>
+                                <div className="hidden lg:ml-10 lg:block">
+                                    <div className="flex space-x-4">
                                         {users.map((item, index) => (
                                             <a
                                                 key={index}
@@ -44,7 +44,7 @@ const Navbar = () => {
                                                             index === 0,
                                                         'bg-white bg-opacity-0 text-white hover:bg-opacity-10':
                                                             index !== 0,
-                                                    },
+                                                    }
                                                 )}
                                             >
                                                 {item.name}
@@ -53,30 +53,29 @@ const Navbar = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='flex lg:hidden'>
+                            <div className="flex lg:hidden">
                                 {/* Mobile menu button */}
-                                <Disclosure.Button
-                                    className='inline-flex items-center justify-center rounded-md bg-primary p-2 text-white focus:outline-none'>
-                                    <span className='sr-only'>
+                                <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-primary p-2 text-white focus:outline-none">
+                                    <span className="sr-only">
                                         Open main menu
                                     </span>
                                     {open ? (
                                         <XMarkIcon
-                                            className='block h-6 w-6'
-                                            aria-hidden='true'
+                                            className="block h-6 w-6"
+                                            aria-hidden="true"
                                         />
                                     ) : (
                                         <Bars3Icon
-                                            className='block h-6 w-6'
-                                            aria-hidden='true'
+                                            className="block h-6 w-6"
+                                            aria-hidden="true"
                                         />
                                     )}
                                 </Disclosure.Button>
                             </div>
                         </div>
                     </div>
-                    <Disclosure.Panel className='lg:hidden'>
-                        <div className='space-y-1 px-2 pb-3 pt-2'>
+                    <Disclosure.Panel className="lg:hidden">
+                        <div className="space-y-1 px-2 pb-3 pt-2">
                             {users.map((item, index) => (
                                 <Disclosure.Button
                                     key={index}
@@ -89,7 +88,7 @@ const Navbar = () => {
                                                 index === 0,
                                             'text-white hover:bg-opacity-75':
                                                 index !== 0,
-                                        },
+                                        }
                                     )}
                                 >
                                     {item.name}
